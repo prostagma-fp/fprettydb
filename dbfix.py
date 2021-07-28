@@ -142,7 +142,7 @@ for items in cursor.fetchall():
                 if value and query_item[key] == (None or ''):
                     if key == 'originalDescription':
                         value = strip_all(value)
-                    print('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+                    #print('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
                     cursor.execute('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
                     changelog += key.upper() + " - (NONE) -> " + value + '\n'
     
@@ -181,5 +181,3 @@ except:
 f = open("changelog.txt", "wb")
 f.write(full_changelog)
 f.close()
-
-#"""
