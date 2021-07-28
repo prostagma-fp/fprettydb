@@ -178,6 +178,6 @@ except:
     raise
 
 # Create changelog file
-f = open("changelog.txt", "wb")
+f = open("changelog.txt", "w")
 f.write(full_changelog)
 f.close()
