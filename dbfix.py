@@ -146,8 +146,8 @@ for items in cursor.fetchall():
                     cursor.execute('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
                     changelog += key.upper() + " - (NONE) -> " + value + '\n'
     
-    # Release Date format for curations without the correct date from above
-    elif query_item['releaseDate'] != '' and re.fullmatch(r'\d{4}(\-(0[1-9]|1[012])|\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))?', query_item['releaseDate']) == None:
+    # Release Date format
+    if query_item['releaseDate'] != '' and re.fullmatch(r'\d{4}(\-(0[1-9]|1[012])|\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))?', query_item['releaseDate']) == None:
         new_releaseDate = re.sub(r'-(?=\d-|\d$)', '-0', query_item['releaseDate'])
         cursor.execute('UPDATE game SET releaseDate = "' + new_releaseDate.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
         changelog += "RELEASEDATE - " + query_item['releaseDate'] + " -> " + new_releaseDate + '\n'
