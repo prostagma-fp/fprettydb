@@ -1,0 +1,4 @@
+*.txt
+!sites/*.txt
+*.sqlite
+**/__pycache__/**
