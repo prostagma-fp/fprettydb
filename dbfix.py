@@ -61,7 +61,6 @@ def get_web_meta(url):
                         html_source = requests.get("https://web.archive.org/web/2id_/"+url)
                     meta = site[1]
                     response = meta().parse(url, BeautifulSoup(html_source.text, 'html.parser'))
-                    #print(response)
                     return response
         except:
             raise
@@ -69,17 +68,17 @@ def get_web_meta(url):
 
 # Meta fetcher test
 def test_sites():
-    get_web_meta("https://www.newgrounds.com/portal/view/817")
-    get_web_meta("https://www.addictinggames.com/shooting/stack-colors")
-    get_web_meta("http://www.coolmathgames.com/0-lavanoid/")
-    get_web_meta("http://www.freearcade.com/Legor3.flash/Legor3.html")
-    get_web_meta("https://cosmicadventuresquad.itch.io/deepest-sword")
-    get_web_meta("https://jayisgames.com/games/arijigora/")
-    get_web_meta("https://www.kongregate.com/games/Ninjakiwi/bloons-td-5")
-    get_web_meta("http://www.miniclip.com/games/mars-patrol/en/")
-    get_web_meta("https://miniclip.com/games/lavalab/en/")
-    get_web_meta("https://pt.y8.com/games/cyber_swat")
-    get_web_meta("http://panget2007panget.deviantart.com/art/Pokemon-Platinum-Pokedex-166528325")
+    print(get_web_meta("https://www.newgrounds.com/portal/view/817"))
+    print(get_web_meta("https://www.addictinggames.com/shooting/stack-colors"))
+    print(get_web_meta("http://www.coolmathgames.com/0-lavanoid/"))
+    print(get_web_meta("http://www.freearcade.com/Legor3.flash/Legor3.html"))
+    print(get_web_meta("https://cosmicadventuresquad.itch.io/deepest-sword"))
+    print(get_web_meta("https://jayisgames.com/games/arijigora/"))
+    print(get_web_meta("https://www.kongregate.com/games/Ninjakiwi/bloons-td-5"))
+    print(get_web_meta("http://www.miniclip.com/games/mars-patrol/en/"))
+    print(get_web_meta("https://miniclip.com/games/lavalab/en/"))
+    print(get_web_meta("https://pt.y8.com/games/cyber_swat"))
+    print(get_web_meta("http://panget2007panget.deviantart.com/art/Pokemon-Platinum-Pokedex-166528325"))
 
 changes_counter = 0
 full_changelog = ''
