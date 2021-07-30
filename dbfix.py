@@ -107,7 +107,7 @@ for items in cursor.fetchall():
     new_title = query_item['title'].strip()
     if query_item['title'] != new_title:
         cursor.execute('UPDATE game SET title = "' + new_title.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
-        changelog += "TITLE - " + query_item['title'] + " -> " + new_title + '\n'
+        changelog += "TITLE - (TRIMMED TO) -> " + new_title + '\n'
     
     #Publisher
     if query_item['publisher'] != '':
@@ -156,7 +156,7 @@ for items in cursor.fetchall():
     new_originalDescription = strip_all(query_item['originalDescription'])
     if new_originalDescription != query_item['originalDescription']:
         cursor.execute('UPDATE game SET originalDescription = "' + new_originalDescription.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
-        changelog += "ORIGINALDESCRIPTION - " + query_item['originalDescription'] + " -> " + new_originalDescription + '\n'
+        changelog += "ORIGINALDESCRIPTION - (TRIMMED TO) -> " + new_originalDescription + '\n'
 
     # Add to changelog
     if len(changelog) > 37: #id + \n
