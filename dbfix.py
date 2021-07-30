@@ -42,7 +42,11 @@ publisher_list = [
     (r'(www.)?[aA]rmor[gG]ames(\.com)?', 'Armor Games'),
     (r'(www.)?[cC]artoon[nN]etwork(\.com)?', 'Cartoon Network'),
     (r'(www.)?[kK]ongregate(\.com)?', 'Kongregate'),
-    (r'(www.)?[yY]8(\.com)?', 'Y8')
+    (r'(www.)?[yY]8(\.com)?', 'Y8'),
+    (r'(www.)?[aA]ndkon(\.com)?', 'Andkon'),
+    (r'(www.)?[mM]ax\s?[gG]ames(\.com)?', 'Max Games'),
+    (r'(www.)?[rR]usty\s?[aA]rcade(\.com)?', 'Rusty Arcade'),
+    (r'(www.)?[rR]oxi\s?[gG]ames(\.com)?', 'RoxiGames')
     ]
 
 # Trim spaces and break lines
@@ -165,7 +169,7 @@ for items in cursor.fetchall():
         changes_counter += 1
 
 full_changelog += '\n' + str(changes_counter) + ' curations changed.'
-print(full_changelog)
+#print(full_changelog)
 
 # Commit and close sqlite
 try:
