@@ -109,7 +109,7 @@ for items in cursor.fetchall():
     # Title
     new_title = query_item['title'].strip()
     if query_item['title'] != new_title:
-        cursor.execute('UPDATE game SET title = "' + new_title.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+        cursor.execute('UPDATE game SET title = (?) WHERE id = (?)', (new_title, query_item['id']))
         changelog += "TITLE - (TRIMMED TO) -> " + new_title + '\n'
     
     #Publisher
@@ -118,7 +118,7 @@ for items in cursor.fetchall():
             if re.search(list_publisher_regex[0], query_item['publisher']):
                 new_publisher = re.sub(list_publisher_regex[0], list_publisher_regex[1], query_item['publisher'])
                 if new_publisher != query_item['publisher']:
-                    cursor.execute('UPDATE game SET publisher = "' + new_publisher.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+                    cursor.execute('UPDATE game SET publisher = (?) WHERE id = (?)', (new_publisher, query_item['id']))
                     changelog += "PUBLISHER - " + query_item['publisher'] + " -> " + new_publisher + '\n'
 
     # Source, also used to online search
@@ -129,7 +129,7 @@ for items in cursor.fetchall():
                 try:
                     testing_source = re.sub(r"(\?|\s)(.*)", "", dict_lambda(query_item['launchCommand']))
                     if testing_source != None:
-                        cursor.execute('UPDATE game SET source = "' + testing_source.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+                        cursor.execute('UPDATE game SET source = (?) WHERE id = (?)', (testing_source, query_item['id']))
                         changelog += "SOURCE - " + query_item['source'] + " -> " + testing_source + '\n'
                 except:
                     pass
@@ -146,24 +146,24 @@ for items in cursor.fetchall():
                     if key == 'originalDescription':
                         value = strip_all(value)
                     #print('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
-                    cursor.execute('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+                    cursor.execute('UPDATE game SET (?) = (?) WHERE id = (?)', (key, value, query_item['id']))
                     changelog += key.upper() + " - (NONE) -> " + value + '\n'
     
     # Release Date format
     if query_item['releaseDate'] != '' and re.fullmatch(r'\d{4}(\-(0[1-9]|1[012])|\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]))?', query_item['releaseDate']) == None:
         new_releaseDate = re.sub(r'-(?=\d-|\d$)', '-0', query_item['releaseDate'])
-        cursor.execute('UPDATE game SET releaseDate = "' + new_releaseDate.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+        cursor.execute('UPDATE game SET releaseDate = (?) WHERE id = (?)', (new_releaseDate, query_item['id']))
         changelog += "RELEASEDATE - " + query_item['releaseDate'] + " -> " + new_releaseDate + '\n'
 
     # Original Description
     new_originalDescription = strip_all(query_item['originalDescription'])
     if new_originalDescription != query_item['originalDescription']:
-        cursor.execute('UPDATE game SET originalDescription = "' + new_originalDescription.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
+        cursor.execute('UPDATE game SET originalDescription = (?) WHERE id = (?)', (new_originalDescription, query_item['id']))
         changelog += "ORIGINALDESCRIPTION - (TRIMMED TO) -> " + new_originalDescription + '\n'
 
     # Add to changelog
     if len(changelog) > 37: #id + \n
-        cursor.execute('UPDATE game SET dateModified = "' + datetime.now().strftime("%d-%m-%Y %H:%M:%S") + '" WHERE id = "' + query_item['id'] + '"')
+        cursor.execute('UPDATE game SET dateModified = (?) WHERE id = (?)', (datetime.now().strftime("%d-%m-%Y %H:%M:%S"), query_item['id']))
         print(changelog)
         full_changelog += changelog + '\n'
         changes_counter += 1
@@ -177,8 +177,10 @@ try:
     fpFile.commit()
     fpFile.close()
 except:
-    print("Did you move the sqlite?")
+    print("Could not write into the sqlite.")
     raise
+
+print (str(changes_counter) + ' curations changed.')
 
 # Create changelog file
 f = open("changelog.txt", "w", encoding="utf-8")
