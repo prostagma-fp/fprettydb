@@ -129,7 +129,7 @@ for items in cursor.fetchall():
                 try:
                     testing_source = re.sub(r"(\?|\s)(.*)", "", dict_lambda(query_item['launchCommand']))
                     if testing_source != None:
-                        cursor.execute('UPDATE game SET source = (?) WHERE id = (?)', (testing_source, query_item['id']))
+                        cursor.execute('UPDATE game SET {} = (?) WHERE id = (?)'.format(key), (value, query_item['id']))
                         changelog += "SOURCE - " + query_item['source'] + " -> " + testing_source + '\n'
                 except:
                     pass
