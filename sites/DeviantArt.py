@@ -18,7 +18,7 @@ class DeviantArt(Curation.Curation):
             info = soup.select(".XeBxZ > .legacy-journal")
             self.meta['originalDescription'] = info[0].text.strip()
         except:
-            return None
+            pass
 
         # Get date
         try:
