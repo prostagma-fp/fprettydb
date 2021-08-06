@@ -14,7 +14,7 @@ class DeviantArt(Curation.Curation):
         except: return None
         
         # Skippable meta (content not from users)
-        skiplist = ['liamandnico', 'Hudsun28Studios']
+        skiplist = ['liamandnico', 'Hudsun28Studios', 'PeasOnNoggin12']
         if self.meta['developer'] in skiplist: return None
 
         # Get info and description
