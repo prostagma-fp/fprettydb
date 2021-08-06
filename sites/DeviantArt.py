@@ -12,6 +12,10 @@ class DeviantArt(Curation.Curation):
         #Get developer
         try: self.meta['developer'] = soup.select_one('a[data-hook="user_link"]')['data-username']
         except: return None
+        
+        # Skippable meta (content not from users)
+        skiplist = ['liamandnico', 'Hudsun28Studios']
+        if self.meta['developer'] in skiplist: return None
 
         # Get info and description
         try:
