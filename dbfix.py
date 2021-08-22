@@ -39,14 +39,19 @@ publisher_list = [
     (r'\.com/', '.com'),
     (r'(www.)?[nN]ewgrounds(\.com)?', 'Newgrounds'),
     (r'(www.)?[dD]eviant\s?[aA]rt(\.com)?', 'DeviantArt'),
-    (r'(www.)?[aA]rmor[gG]ames(\.com)?', 'Armor Games'),
-    (r'(www.)?[cC]artoon[nN]etwork(\.com)?', 'Cartoon Network'),
+    (r'(www.)?[aA]rmor\?[gG]ames(\.com)?', 'Armor Games'),
+    (r'(www.)?[cC]artoon\?[nN]etwork(\.com)?', 'Cartoon Network'),
     (r'(www.)?[kK]ongregate(\.com)?', 'Kongregate'),
     (r'(www.)?[yY]8(\.com)?', 'Y8'),
     (r'(www.)?[aA]ndkon(\.com)?', 'Andkon'),
     (r'(www.)?[mM]ax\s?[gG]ames(\.com)?', 'Max Games'),
     (r'(www.)?[rR]usty\s?[aA]rcade(\.com)?', 'Rusty Arcade'),
-    (r'(www.)?[rR]oxi\s?[gG]ames(\.com)?', 'RoxiGames')
+    (r'(www.)?[rR]oxi\s?[gG]ames(\.com)?', 'RoxiGames'),
+    (r'(www.)?[gG]ames\?[sS]umo(\.com)?', 'GamesSumo'),
+    (r'(www.)?[cC]artoon\s?[rR]ace(\.com)?', 'CartoonRace'),
+    (r'(www.)?[pP]pupu\s?[gG]ames(\.com)?', 'Pupu Games'),
+    (r'(www.)?[pP]lay\s?[tT]oon\s?[gG]ames(\.com)?', 'Play Toon Games'),
+    (r'(www.)?[kK]ing\s?[gG]ames(\.net)?', 'King Games')
     ]
 
 # Trim spaces and break lines
