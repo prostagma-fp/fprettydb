@@ -112,7 +112,7 @@ for items in cursor.fetchall():
     changelog = query_item['id'] + '\n'
 
     # Title
-    new_title = query_item['title'].strip()
+    new_title = query_item['title'].strip().replace("  ", " ")
     if query_item['title'] != new_title:
         cursor.execute('UPDATE game SET title = (?) WHERE id = (?)', (new_title, query_item['id']))
         changelog += "TITLE - (TRIMMED TO) -> " + new_title + '\n'
