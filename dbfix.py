@@ -98,7 +98,7 @@ except:
     print("This script should in the same folder as flashpoint.sqlite.")
     exit()
 cursor = fpFile.cursor()
-full_query = 'SELECT id, title, developer, publisher, source, launchCommand, releaseDate, originalDescription FROM game'
+full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription FROM game'
 cursor.execute(full_query)
 
 meta_list = ['id', 'title', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription'] #dirty hack
@@ -116,6 +116,12 @@ for items in cursor.fetchall():
     if query_item['title'] != new_title:
         cursor.execute('UPDATE game SET title = (?) WHERE id = (?)', (new_title, query_item['id']))
         changelog += "TITLE - (TRIMMED TO) -> " + new_title + '\n'
+        
+    # Alternate title
+    new_title = query_item['alternateTitles'].strip().replace("  ", " ")
+    if query_item['alternateTitles'] != new_title:
+        cursor.execute('UPDATE game SET alternateTitles = (?) WHERE id = (?)', (new_title, query_item['id']))
+        changelog += "ALTERNATETITLES - (TRIMMED TO) -> " + new_title + '\n'
     
     #Publisher
     if query_item['publisher'] != '':
@@ -143,6 +149,7 @@ for items in cursor.fetchall():
     # Developer, Release Date, Original Description = online search
     no_publisher = query_item
     no_publisher.pop('publisher')
+    no_publisher.pop('alternateTitles')
     if '' in no_publisher.values():
         fetched_meta = get_web_meta(testing_source)
         if fetched_meta != None:
