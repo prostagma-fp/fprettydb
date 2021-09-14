@@ -158,7 +158,7 @@ for items in cursor.fetchall():
                     if key == 'originalDescription':
                         value = strip_all(value)
                     #print('UPDATE game SET ' + key + ' = "' + value.replace('"', '""') + '" WHERE id = "' + query_item['id'] + '"')
-                    cursor.execute('UPDATE game SET (?) = (?) WHERE id = (?)', (key, value, query_item['id']))
+                    cursor.execute('UPDATE game SET {} = (?) WHERE id = (?)'.format(key), (value, query_item['id']))
                     changelog += key.upper() + " - (NONE) -> " + value + '\n'
     
     # Release Date format
