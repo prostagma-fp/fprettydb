@@ -101,7 +101,7 @@ cursor = fpFile.cursor()
 full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription FROM game'
 cursor.execute(full_query)
 
-meta_list = ['id', 'title', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription'] #dirty hack
+meta_list = ['id', 'title', 'alternateTitles', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription'] #dirty hack
 query_item = {}
 
 #for item_id, item_title, item_developer, item_publisher, item_source, item_launchCommand, item_releaseDate, item_originalDescription in cursor.fetchall():
