@@ -55,7 +55,7 @@ publisher_list = [
     ]
 
 # Trim spaces and break lines
-strip_all = lambda value: value.strip('\r\n').strip('\n').strip().replace('\n\n\n', '\n\n').replace('\r\n\r\n\r\n', '\r\n\r\n')
+strip_all = lambda value: value.strip('\r\n').strip('\n').strip()
 
 # Match url with site definitions and try to download meta if any matches
 def get_web_meta(url):
@@ -63,7 +63,7 @@ def get_web_meta(url):
         try:
             for site in site_defs: #site[0] = regex, site[1] = class
                 if re.search(site[0], url):
-                    print('Fetching ' + url + " with " + str(site[0]))
+                    print('(' +  '%) Fetching ' + url + " with " + str(site[0]))
                     try:
                         html_source = requests.get(url)
                     except:
