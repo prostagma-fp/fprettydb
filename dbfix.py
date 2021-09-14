@@ -55,7 +55,7 @@ publisher_list = [
     ]
 
 # Trim spaces and break lines
-strip_all = lambda value: value.strip('\r\n').strip('\n').strip()
+strip_all = lambda value: value.strip('\r\n').strip('\n').strip().replace('\n\n\n', '\n\n').replace('\r\n\r\n\r\n', '\r\n\r\n')
 
 # Match url with site definitions and try to download meta if any matches
 def get_web_meta(url):
@@ -63,7 +63,7 @@ def get_web_meta(url):
         try:
             for site in site_defs: #site[0] = regex, site[1] = class
                 if re.search(site[0], url):
-                    print('(' +  '%) Fetching ' + url + " with " + str(site[0]))
+                    print("(" + str(round(currentCuration/numCurations, 3)) + "%) Fetching " + url + " with " + str(site[0]))
                     try:
                         html_source = requests.get(url)
                     except:
@@ -98,6 +98,13 @@ except:
     print("This script should in the same folder as flashpoint.sqlite.")
     exit()
 cursor = fpFile.cursor()
+
+# Percentage indicators
+cursor.execute('SELECT Count() FROM game')
+numCurations = cursor.fetchone()[0]
+currentCuration = 0
+
+# Query
 full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription FROM game'
 cursor.execute(full_query)
 
@@ -179,6 +186,8 @@ for items in cursor.fetchall():
         print(changelog)
         full_changelog += changelog + '\n'
         changes_counter += 1
+    
+    currentCuration += 1
 
 full_changelog += '\n' + str(changes_counter) + ' curations changed.'
 #print(full_changelog)
