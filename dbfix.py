@@ -63,7 +63,7 @@ def get_web_meta(url):
         try:
             for site in site_defs: #site[0] = regex, site[1] = class
                 if re.search(site[0], url):
-                    print("(" + str(round(currentCuration/numCurations, 3)) + "%) Fetching " + url + " with " + str(site[0]))
+                    print("(" + str(round((currentCuration/numCurations)*100, 3)) + "%) Fetching " + url + " with " + str(site[0]))
                     try:
                         html_source = requests.get(url)
                     except:
