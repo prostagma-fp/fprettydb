@@ -51,7 +51,8 @@ publisher_list = [
     (r'(www.)?[cC]artoon\s?[rR]ace(\.com)?', 'CartoonRace'),
     (r'(www.)?[pP]pupu\s?[gG]ames(\.com)?', 'Pupu Games'),
     (r'(www.)?[pP]lay\s?[tT]oon\s?[gG]ames(\.com)?', 'Play Toon Games'),
-    (r'(www.|^)[kK]ing\s?[gG]ames(\.net)?', 'King Games')
+    (r'(www.|^)[kK]ing\s?[gG]ames(\.net)?', 'King Games'),
+    (r'(www.)?[cC]ooKing\s?Games(\.com)?', 'Cooking Games')
     ]
 
 # Trim spaces and break lines
