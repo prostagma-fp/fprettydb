@@ -45,10 +45,13 @@ class JayIsGames(Curation.Curation):
 
             self.meta['developer'] = text[0].strip()[3:]
             match = DATE.fullmatch(text[1].strip())
-            self.meta['releaseDate'] = match[3] + "-" + MONTHS[match[1]] + "-" + match[2].zfill(2)
+            try: self.meta['releaseDate'] = match[3].replace(" ", "") + "-" + MONTHS[match[1].replace(" ", "")] + "-" + match[2].zfill(2)
+            except: pass
         elif self.meta['originalDescription']:
-            dev = DEV.search(self.meta['originalDescription'])
-            if dev: self.meta['developer'] = dev[2]
+            try:
+                dev = DEV.search(self.meta['originalDescription'])
+                if dev: self.meta['developer'] = dev[2]
+            except: pass
 
         # Return variables
         return self.meta
