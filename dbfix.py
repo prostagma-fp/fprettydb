@@ -106,10 +106,10 @@ numCurations = cursor.fetchone()[0]
 currentCuration = 0
 
 # Query
-full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription FROM game'
+full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription, language FROM game'
 cursor.execute(full_query)
 
-meta_list = ['id', 'title', 'alternateTitles', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription'] #dirty hack
+meta_list = ['id', 'title', 'alternateTitles', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription', 'language'] #dirty hack
 query_item = {}
 
 #for item_id, item_title, item_developer, item_publisher, item_source, item_launchCommand, item_releaseDate, item_originalDescription in cursor.fetchall():
@@ -158,6 +158,7 @@ for items in cursor.fetchall():
     no_publisher = query_item
     no_publisher.pop('publisher')
     no_publisher.pop('alternateTitles')
+    no_publisher.pop('language')
     if '' in no_publisher.values():
         fetched_meta = get_web_meta(testing_source)
         if fetched_meta != None:
@@ -181,6 +182,12 @@ for items in cursor.fetchall():
         cursor.execute('UPDATE game SET originalDescription = (?) WHERE id = (?)', (new_originalDescription, query_item['id']))
         changelog += "ORIGINALDESCRIPTION - (TRIMMED TO) -> " + new_originalDescription + '\n'
 
+    # Language
+    new_lang = re.sub(r'(;)?(\s)?$', '', query_item['language'].strip().replace("  ", " ")).replace(" ;", ";")
+    if query_item['language'] != new_lang:
+        cursor.execute('UPDATE game SET language = (?) WHERE id = (?)', (new_lang, query_item['id']))
+        changelog += "LANGUAGE - (TRIMMED TO) -> " + new_lang + '\n'
+        
     # Add to changelog
     if len(changelog) > 37: #id + \n
         cursor.execute('UPDATE game SET dateModified = (?) WHERE id = (?)', (datetime.now().strftime("%d-%m-%Y %H:%M:%S"), query_item['id']))
