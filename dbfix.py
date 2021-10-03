@@ -190,7 +190,7 @@ for items in cursor.fetchall():
         
     # Add to changelog
     if len(changelog) > 37: #id + \n
-        cursor.execute('UPDATE game SET dateModified = (?) WHERE id = (?)', (datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"), query_item['id']))
+        cursor.execute('UPDATE game SET dateModified = (?) WHERE id = (?)', (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), query_item['id']))
         print(changelog)
         full_changelog += changelog + '\n'
         changes_counter += 1
