@@ -106,10 +106,10 @@ numCurations = cursor.fetchone()[0]
 currentCuration = 0
 
 # Query
-full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription, language FROM game'
+full_query = 'SELECT id, title, alternateTitles, developer, publisher, source, launchCommand, releaseDate, originalDescription, language, tagsStr FROM game'
 cursor.execute(full_query)
 
-meta_list = ['id', 'title', 'alternateTitles', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription', 'language'] #dirty hack
+meta_list = ['id', 'title', 'alternateTitles', 'developer', 'publisher', 'source', 'launchCommand', 'releaseDate', 'originalDescription', 'language', 'tagsStr'] #dirty hack
 query_item = {}
 
 #for item_id, item_title, item_developer, item_publisher, item_source, item_launchCommand, item_releaseDate, item_originalDescription in cursor.fetchall():
@@ -131,6 +131,44 @@ for items in cursor.fetchall():
         cursor.execute('UPDATE game SET alternateTitles = (?) WHERE id = (?)', (new_title, query_item['id']))
         changelog += "ALTERNATETITLES - (TRIMMED TO) -> " + new_title + '\n'
     
+    # Language
+    new_lang = re.sub(r'(;)?(\s)?$', '', query_item['language'].strip().replace("  ", " ")).replace(" ;", ";")
+    if query_item['language'] != new_lang:
+        cursor.execute('UPDATE game SET language = (?) WHERE id = (?)', (new_lang, query_item['id']))
+        changelog += "LANGUAGE - (TRIMMED TO) -> " + new_lang + '\n'
+        
+    # Tags
+    # Adventure = all but Role-Playing
+    # Sports = all but Archery, Swimming, Racing
+    # Puzzle = all but Maze, Stealth
+    # Simulation = all but Driving, Flying
+    # Strategy = all but Turn-Based
+    # Others get either specfic tags or all subtags
+    tag_list = {
+        'Action': ['Fighting', 'Run \'n\' Gun'],
+        'Adventure': ['Choose Your Own Adventure', 'Dating Simulator', 'Dungeon Crawler', 'Escape the Room', 'Interactive Fiction', 'Metroidvania', 'MMO', 'Point and Click', 'Survival', 'Visual Novel'],
+        'Arcade': ['Balancing', 'Button Masher', 'Bounce', 'Brick Breaker', 'Claw Game', 'Catching', 'Clicker', 'Cross the Road', 'Endless Flyer', 'Endless Jumper', 'Fixed Shooter', 'Food Chain', 'Launch', 'Pellet Maze', 'Pinball', 'Pong', 'Rhythm', 'Rock-Paper-Scissors', 'Runner', 'Score-Attack', 'Snake', 'Stacking', 'Tetris', 'Timing', 'Toss', 'Whack-A-Mole', 'Variety'],
+        'Card': ['Blackjack', 'Collectible Card Game', 'Poker', 'Solitaire'],
+        'Educational': ['Computer Science', 'Science'],
+        'Puzzle': ['Codebreaker', 'Connect the Dots', 'Find', 'Hangman', 'Jigsaw', 'Lemmings', 'Logic', 'Marble Popper', 'Matching', 'Match-3', 'Memory', 'Minesweeper', 'Mixing', 'Nonogram', 'Peg Solitaire', 'Pipe Connector', 'Sequential', 'Sliding', 'Sokoban', 'Sudoku', 'Tile Merger', 'Vertical Drop', 'Word'],
+        'Simulation': ['Babysitting', 'Bingo', 'Cooking', 'Cleaning', 'Dentist', 'Dice', 'Doctor', 'Farming', 'Fishing', 'Gambling', 'Hairdressing', 'Hunting', 'Luck Roller', 'Mahjong', 'Parking', 'Pet', 'Restaurant', 'Slot Machine', 'Spa', 'Surgery', 'Repairing', 'Tabletop', 'Tattoo Artist', 'Time Management', 'Tycoon', 'Virtual World', 'Walking Simulator'],
+        'Sports': ['American Football', 'Athletics', 'Baseball', 'Basketball', 'Billiards', 'Boating', 'Bowling', 'Boxing', 'Cricket', 'Curling', 'Cycling', 'Equestrianism', 'Golf', 'Hockey', 'Motocross', 'Skateboarding', 'Skating', 'Skiing', 'Snowboarding', 'Soccer', 'Surfing', 'Tennis', 'Volleyball'],
+        'Strategy': ['Ataxx', 'Battleship', 'Checkers', 'Chess', 'Domiones', 'Lane-Based Strategy', 'Node-Based Strategy', 'Real-Time Strategy', 'Reversi', 'Tower Defense', 'Tic-Tac-Toe'],
+        'Game Jam': ['7DRL Challenge', 'BC Game Jam', 'BenBonk Game Jam', 'Butterscotch ShenaniJam', 'Casual Gameplay Design Competition', 'Game Maker\'s Toolkit Game Jam', 'Game in Ten Days', 'Global Game Jam', 'Homestuck Game Jam', 'Lisp Game Jam', 'LOWREZJAM', 'Ludum Dare', 'Make-A-Thing Jam', 'Metroidvania Month', 'Mini Jam', 'NG Game Jam', 'Nokia 3310 Jam', 'Nordic Game Jam', 'Pastel Jam', 'Pizza Jam', 'SPJam', 'Starmen.Net Funfest', 'Stencyl Jam', 'The Boob Jam', 'Touhou Fan Game Jam', 'xkcd Game Jam'],
+        'Pixel': ['GB Studio', 'PICO-8', 'LOWREZJAM', 'Nokia 3310 Jam']
+    }
+    for parent_tag in tag_list:
+        for child_tag in tag_list[parent_tag]:
+            # We want to be sure the searched tag isnt just part of another, ex. 'Shooter' may be from 'First Person Shooter'
+            if re.search(r'(?<!\w )'+child_tag+r'(;|$)', query_item['tagsStr']) and not re.search(r'(?<!\w )'+parent_tag+r'(;|$)', query_item['tagsStr']):
+                cursor.execute('UPDATE game SET tagsStr = (?) WHERE id = (?)', (query_item['tagsStr'] + '; ' + parent_tag, query_item['id']))
+                cursor.execute('SELECT tagId FROM tag_alias where name = (?) LIMIT 1', (parent_tag,))
+                tagId = cursor.fetchone()[0]
+                try: # Tag may be already in its proper table and just wasnt in tagsStr
+                    cursor.execute('INSERT INTO game_tags_tag (gameId, tagId) VALUES ( (?), (?) )', (query_item['id'], tagId))
+                    changelog += 'TAGS - Added <' + parent_tag + '> due to <' + child_tag + '>\n'
+                except: pass
+
     #Publisher
     if query_item['publisher'] != '':
         for list_publisher_regex in publisher_list:
@@ -159,6 +197,7 @@ for items in cursor.fetchall():
     no_publisher.pop('publisher')
     no_publisher.pop('alternateTitles')
     no_publisher.pop('language')
+    no_publisher.pop('tagsStr')
     if '' in no_publisher.values():
         fetched_meta = get_web_meta(testing_source)
         if fetched_meta != None:
@@ -181,12 +220,6 @@ for items in cursor.fetchall():
     if new_originalDescription != query_item['originalDescription']:
         cursor.execute('UPDATE game SET originalDescription = (?) WHERE id = (?)', (new_originalDescription, query_item['id']))
         changelog += "ORIGINALDESCRIPTION - (TRIMMED TO) -> " + new_originalDescription + '\n'
-
-    # Language
-    new_lang = re.sub(r'(;)?(\s)?$', '', query_item['language'].strip().replace("  ", " ")).replace(" ;", ";")
-    if query_item['language'] != new_lang:
-        cursor.execute('UPDATE game SET language = (?) WHERE id = (?)', (new_lang, query_item['id']))
-        changelog += "LANGUAGE - (TRIMMED TO) -> " + new_lang + '\n'
         
     # Add to changelog
     if len(changelog) > 37: #id + \n
@@ -212,6 +245,7 @@ except:
 print (str(changes_counter) + ' curations changed.')
 
 # Create changelog file
-f = open("changelog.txt", "w", encoding="utf-8")
-f.write(full_changelog)
-f.close()
+if len(full_changelog) > 21:
+    f = open("changelog.txt", "w", encoding="utf-8")
+    f.write(full_changelog)
+    f.close()
