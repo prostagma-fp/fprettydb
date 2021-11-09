@@ -141,7 +141,7 @@ for items in cursor.fetchall():
     # Adventure = all but Role-Playing
     # Arcade = all but Clicker, Runner, Variety
     # Sports = all but Archery, Cycling, Swimming, Racing
-    # Puzzle = all but Maze, Stealth
+    # Puzzle = all but Maze, Matching, Stealth
     # Simulation = all but Driving, Flying, Gambling
     # Strategy = all but Turn-Based
     # Others get either specfic tags or all subtags
@@ -151,7 +151,7 @@ for items in cursor.fetchall():
         'Arcade': ['Balancing', 'Button Masher', 'Bounce', 'Brick Breaker', 'Claw Game', 'Catching', 'Cross the Road', 'Endless Flyer', 'Endless Jumper', 'Fixed Shooter', 'Food Chain', 'Launch', 'Pellet Maze', 'Pinball', 'Pong', 'Rhythm', 'Rock-Paper-Scissors', 'Score-Attack', 'Snake', 'Stacking', 'Tetris', 'Timing', 'Toss', 'Whack-A-Mole'],
         'Card': ['Blackjack', 'Collectible Card Game', 'Poker', 'Solitaire'],
         'Educational': ['Computer Science', 'Science'],
-        'Puzzle': ['Codebreaker', 'Connect the Dots', 'Find', 'Hangman', 'Jigsaw', 'Lemmings', 'Logic', 'Marble Popper', 'Matching', 'Match-3', 'Memory', 'Minesweeper', 'Mixing', 'Nonogram', 'Peg Solitaire', 'Pipe Connector', 'Sequential', 'Sliding', 'Sokoban', 'Sudoku', 'Tile Merger', 'Vertical Drop', 'Word'],
+        'Puzzle': ['Codebreaker', 'Connect the Dots', 'Find', 'Hangman', 'Jigsaw', 'Lemmings', 'Logic', 'Marble Popper', 'Match-3', 'Memory', 'Minesweeper', 'Mixing', 'Nonogram', 'Peg Solitaire', 'Pipe Connector', 'Sequential', 'Sliding', 'Sokoban', 'Sudoku', 'Tile Merger', 'Vertical Drop', 'Word'],
         'Simulation': ['Babysitting', 'Bingo', 'Cooking', 'Cleaning', 'Dentist', 'Dice', 'Doctor', 'Farming', 'Fishing', 'Hairdressing', 'Hunting', 'Luck Roller', 'Mahjong', 'Parking', 'Pet', 'Restaurant', 'Slot Machine', 'Spa', 'Surgery', 'Repairing', 'Tabletop', 'Tattoo Artist', 'Time Management', 'Tycoon', 'Virtual World', 'Walking Simulator'],
         'Sports': ['American Football', 'Athletics', 'Baseball', 'Basketball', 'Billiards', 'Boating', 'Bowling', 'Boxing', 'Cricket', 'Curling', 'Equestrianism', 'Golf', 'Hockey', 'Motocross', 'Skateboarding', 'Skating', 'Skiing', 'Snowboarding', 'Soccer', 'Surfing', 'Tennis', 'Volleyball'],
         'Strategy': ['Ataxx', 'Battleship', 'Checkers', 'Chess', 'Domiones', 'Lane-Based Strategy', 'Node-Based Strategy', 'Real-Time Strategy', 'Reversi', 'Tower Defense', 'Tic-Tac-Toe'],
