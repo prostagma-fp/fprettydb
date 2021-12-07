@@ -25,7 +25,8 @@ class CoolmathGames(Curation.Curation):
             for elem in soup.find('div', class_='game-instructions').children:
                 if isinstance(elem, bs4.NavigableString):
                     continue
-                desc += '\n\n' + elem.text
+                if elem.attrs == {} or elem.attrs['class'][0] != 'mobile':
+                    desc += '\n\n' + elem.text
         except:
             pass
         
