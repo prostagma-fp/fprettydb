@@ -52,7 +52,9 @@ publisher_list = [
     (r'(www.)?[pP]pupu\s?[gG]ames(\.com)?', 'Pupu Games'),
     (r'(www.)?[pP]lay\s?[tT]oon\s?[gG]ames(\.com)?', 'Play Toon Games'),
     (r'(www.|^)[kK]ing\s?[gG]ames(\.net)?', 'King Games'),
-    (r'(www.)?[cC]ooKing\s?Games(\.com)?', 'Cooking Games')
+    (r'(www.)?[cC]ooKing\s?Games(\.com)?', 'Cooking Games'),
+    (r'(www.)?[iI]nka[gG]ames(\.com)?', 'Inka Games'),
+    (r'(www.)?[nN]ickelodeon(\.com)?', 'Nickelodeon')
     ]
 
 # Trim spaces and break lines
@@ -170,6 +172,15 @@ for items in cursor.fetchall():
                     changelog += 'TAGS - Added <' + parent_tag + '> due to <' + child_tag + '>\n'
                 except: pass
 
+    #Developer
+    if query_item['developer'] != '':
+        for list_publisher_regex in publisher_list:
+            if re.search(list_publisher_regex[0], query_item['publisher']):
+                new_developer = re.sub(list_publisher_regex[0], list_publisher_regex[1], query_item['developer'])
+                if new_developer != query_item['developer']:
+                    cursor.execute('UPDATE game SET developer = (?) WHERE id = (?)', (new_developer, query_item['id']))
+                    changelog += "DEVELOPER - " + query_item['developer'] + " -> " + new_developer + '\n'
+    
     #Publisher
     if query_item['publisher'] != '':
         for list_publisher_regex in publisher_list:
@@ -222,7 +233,7 @@ for items in cursor.fetchall():
         cursor.execute('UPDATE game SET originalDescription = (?) WHERE id = (?)', (new_originalDescription, query_item['id']))
         changelog += "ORIGINALDESCRIPTION - (TRIMMED TO) -> " + new_originalDescription + '\n'
         
-    # Add to changelog
+    # Change dateModified, add to changelog
     if len(changelog) > 37: #id + \n
         cursor.execute('UPDATE game SET dateModified = (?) WHERE id = (?)', (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), query_item['id']))
         print(changelog)
@@ -240,7 +251,7 @@ try:
     fpFile.commit()
     fpFile.close()
 except:
-    print("Could not write into the sqlite.")
+    print("ERROR: Could not write into the sqlite.")
     raise
 
 print (str(changes_counter) + ' curations changed.')
