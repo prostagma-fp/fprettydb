@@ -13,6 +13,10 @@ class ItchIO(Curation.Curation):
             authors = soup.find("td", text="Author").parent
             self.meta['developer'] = "; ".join([e.text for e in authors.find_all("a")])
         except: pass
+        try:
+            authors = soup.find("td", text="Authors").parent
+            self.meta['developer'] = "; ".join([e.text for e in authors.find_all("a")])
+        except: pass
         
         # Get languages
         '''try:
