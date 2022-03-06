@@ -23,9 +23,10 @@ class DeviantArt(Curation.Curation):
         try:
             originalDescription = str(soup.select(".XeBxZ > .legacy-journal")[0]).replace('\xa0', ' ')
             replacements = [
-                (r'<a(.+?)href="(https:..www.deviantart.com.users.outgoing\?)?(.+?)"(.+?)>',  r'\3'),
-                (r'<img (.*?)alt="(.+?)"(.+?)\/>',  r'\2'),
-                (r'\s?<br\/?>', '\n'),
+                (r'<a(.+?)href="(https:..www.deviantart.com.users.outgoing\?)?(.+?)"(.+?)>', r'\3'),
+                (r'<img (.+?)alt="(.+?)"(.+?)\/>', r'\2'),
+                (r'\s?<br(\s\/)?>', '\n'),
+                (r'\s?&nbsp;\s?', ''),
                 (r'\n?(<ul>)?<li>', '\n• '),
                 (r'<\/?(.+?)>', ''),
                 (r'\s?\n\n\n\s?', '\n\n')

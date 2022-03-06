@@ -26,6 +26,12 @@ class ItchIO(Curation.Curation):
         
         #self.meta['publisher'] = "itch.io"
 
+        # Description
+        try:
+            desc = re.sub(r'<.*?>', '', repr(soup.select_one('.formatted_description')).replace('<li>', '\r\n•').replace('</tr>', '\r\n').replace('</td><td>', ' ').replace('<br>', '\r\n')).replace('\r\n\r\n', '\r\n').strip('\r\n')
+            if desc != 'None': self.desc = unescape(desc.replace('\r\n\r\n', '\r\n'))
+        except: pass
+        
         # Release date
         try:
             self.meta['releaseDate'] = fpclib.DP_UK.parse(soup.select_one(".game_info_panel_widget tbody abbr")["title"])

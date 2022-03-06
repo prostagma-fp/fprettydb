@@ -53,7 +53,7 @@ publisher_list = [
     (r'(www.)?[pP]lay\s?[tT]oon\s?[gG]ames(\.com)?', 'Play Toon Games'),
     (r'(www.|^)[kK]ing\s?[gG]ames(\.net)?', 'King Games'),
     (r'(www.)?[cC]ooKing\s?Games(\.com)?', 'Cooking Games'),
-    (r'(www.)?[iI]nka[gG]ames(\.com)?', 'Inka Games'),
+    (r'(www.)?[iI]nka\s?[gG]ames(\.com)?', 'Inka Games'),
     (r'(www.)?[nN]ickelodeon(\.com)?', 'Nickelodeon')
     ]
 
@@ -70,7 +70,8 @@ def get_web_meta(url):
                     try:
                         html_source = requests.get(url)
                     except:
-                        html_source = requests.get("https://web.archive.org/web/2id_/"+url)
+                        try: html_source = requests.get("https://web.archive.org/web/2id_/"+url)
+                        except: continue
                     meta = site[1]
                     response = meta().parse(url, BeautifulSoup(html_source.text, 'html.parser'))
                     return response
@@ -151,13 +152,13 @@ for items in cursor.fetchall():
         'Action': ['Run \'n\' Gun'],
         'Adventure': ['Choose Your Own Adventure', 'Dating Simulator', 'Dungeon Crawler', 'Escape the Room', 'Interactive Fiction', 'Metroidvania', 'MMO', 'Point and Click', 'Survival', 'Visual Novel'],
         'Arcade': ['Balancing', 'Button Masher', 'Bounce', 'Brick Breaker', 'Claw Game', 'Catching', 'Cross the Road', 'Endless Flyer', 'Endless Jumper', 'Fixed Shooter', 'Food Chain', 'Launch', 'Pellet Maze', 'Pinball', 'Pong', 'Rhythm', 'Rock-Paper-Scissors', 'Score-Attack', 'Snake', 'Stacking', 'Tetris', 'Timing', 'Toss', 'Whack-A-Mole'],
-        'Card': ['Blackjack', 'Collectible Card Game', 'Poker', 'Solitaire'],
+        'Card': ['Ace Trumps', 'Blackjack', 'Collectible Card Game', 'Poker', 'Shedding', 'Solitaire'],
         'Educational': ['Computer Science', 'Science'],
-        'Puzzle': ['Codebreaker', 'Connect the Dots', 'Find', 'Hangman', 'Jigsaw', 'Lemmings', 'Logic', 'Marble Popper', 'Match-3', 'Memory', 'Minesweeper', 'Mixing', 'Nonogram', 'Peg Solitaire', 'Pipe Connector', 'Sequential', 'Sliding', 'Sokoban', 'Sudoku', 'Tile Merger', 'Vertical Drop', 'Word'],
+        'Puzzle': ['Codebreaker', 'Connect the Dots', 'Find', 'Hangman', 'Hidden Objects', 'Jigsaw', 'Lemmings', 'Logic', 'Marble Popper', 'Match-3', 'Memory', 'Minesweeper', 'Mixing', 'Nonogram', 'Peg Solitaire', 'Pipe Connector', 'Sequential', 'Sliding', 'Sokoban', 'Spot the Difference', 'Sudoku', 'Tile Merger', 'Vertical Drop', 'Word'],
         'Simulation': ['Babysitting', 'Bingo', 'Cooking', 'Cleaning', 'Dentist', 'Dice', 'Doctor', 'Farming', 'Fishing', 'Hairdressing', 'Hunting', 'Luck Roller', 'Mahjong', 'Parking', 'Pet', 'Restaurant', 'Slot Machine', 'Spa', 'Surgery', 'Repairing', 'Tabletop', 'Tattoo Artist', 'Time Management', 'Tycoon', 'Virtual World', 'Walking Simulator'],
         'Sports': ['American Football', 'Athletics', 'Baseball', 'Basketball', 'Billiards', 'Boating', 'Bowling', 'Boxing', 'Cricket', 'Curling', 'Equestrianism', 'Golf', 'Hockey', 'Motocross', 'Skateboarding', 'Skating', 'Skiing', 'Snowboarding', 'Soccer', 'Surfing', 'Tennis', 'Volleyball'],
         'Strategy': ['Ataxx', 'Battleship', 'Checkers', 'Chess', 'Domiones', 'Lane-Based Strategy', 'Node-Based Strategy', 'Real-Time Strategy', 'Reversi', 'Tower Defense', 'Tic-Tac-Toe'],
-        'Game Jam': ['7DRL Challenge', 'BC Game Jam', 'BenBonk Game Jam', 'Butterscotch ShenaniJam', 'Casual Gameplay Design Competition', 'Game Maker\'s Toolkit Game Jam', 'Game in Ten Days', 'Global Game Jam', 'Homestuck Game Jam', 'Lisp Game Jam', 'LOWREZJAM', 'Ludum Dare', 'Make-A-Thing Jam', 'Metroidvania Month', 'Mini Jam', 'NG Game Jam', 'Nokia 3310 Jam', 'Nordic Game Jam', 'Pastel Jam', 'Pizza Jam', 'SPJam', 'Starmen.Net Funfest', 'Stencyl Jam', 'The Boob Jam', 'Touhou Fan Game Jam', 'xkcd Game Jam'],
+        'Game Jam': ['7DRL Challenge', 'BC Game Jam', 'BenBonk Game Jam', 'Butterscotch ShenaniJam', 'Casual Gameplay Design Competition', 'Decade Jam', 'Game Maker\'s Toolkit Game Jam', 'Game in Ten Days', 'Global Game Jam', 'Homestuck Game Jam', 'Lisp Game Jam', 'LOWREZJAM', 'Ludum Dare', 'Make-A-Thing Jam', 'Metroidvania Month', 'Mini Jam', 'NG Game Jam', 'Nokia 3310 Jam', 'Nordic Game Jam', 'One Game a Month', 'Pastel Jam', 'Pizza Jam', 'SPJam', 'Starmen.Net Funfest', 'Stencyl Jam', 'The Boob Jam', 'Touhou Fan Game Jam', 'xkcd Game Jam'],
         'Pixel': ['GB Studio', 'PICO-8', 'LOWREZJAM', 'Nokia 3310 Jam']
     }
     for parent_tag in tag_list:
