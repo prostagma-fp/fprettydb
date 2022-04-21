@@ -39,22 +39,63 @@ publisher_list = [
     (r'\.com/', '.com'),
     (r'(www.)?[nN]ewgrounds(\.com)?', 'Newgrounds'),
     (r'(www.)?[dD]eviant\s?[aA]rt(\.com)?', 'DeviantArt'),
-    (r'(www.)?[aA]rmor\?[gG]ames(\.com)?', 'Armor Games'),
-    (r'(www.)?[cC]artoon\?[nN]etwork(\.com)?', 'Cartoon Network'),
+    (r'(www.)?[aA]rmor\s?[gG]ames(\.com)?', 'Armor Games'),
+    (r'(www.)?[cC]artoon\s?[nN]etwork(\.(com|nl|es|fr))?', 'Cartoon Network'),
     (r'(www.)?[kK]ongregate(\.com)?', 'Kongregate'),
     (r'(www.)?[yY]8(\.com)?', 'Y8'),
     (r'(www.)?[aA]ndkon(\.com)?', 'Andkon'),
     (r'(www.)?[mM]ax\s?[gG]ames(\.com)?', 'Max Games'),
     (r'(www.)?[rR]usty\s?[aA]rcade(\.com)?', 'Rusty Arcade'),
     (r'(www.)?[rR]oxi\s?[gG]ames(\.com)?', 'RoxiGames'),
-    (r'(www.)?[gG]ames\?[sS]umo(\.com)?', 'GamesSumo'),
+    (r'(www.)?[gG]ames\s?[sS]umo(\.com)?', 'GamesSumo'),
     (r'(www.)?[cC]artoon\s?[rR]ace(\.com)?', 'CartoonRace'),
     (r'(www.)?[pP]pupu\s?[gG]ames(\.com)?', 'Pupu Games'),
     (r'(www.)?[pP]lay\s?[tT]oon\s?[gG]ames(\.com)?', 'Play Toon Games'),
     (r'(www.|^)[kK]ing\s?[gG]ames(\.net)?', 'King Games'),
     (r'(www.)?[cC]ooKing\s?Games(\.com)?', 'Cooking Games'),
     (r'(www.)?[iI]nka\s?[gG]ames(\.com)?', 'Inka Games'),
-    (r'(www.)?[nN]ickelodeon(\.com)?', 'Nickelodeon')
+    (r'(www.)?[nN]ickelodeon(\.com)?', 'Nickelodeon'),
+    (r'(www.)?1000([wW]eb)?\s?[gG]ames(\.com)?', '1000 Web Games'),
+    (r'(www.)?123\s?[bB]ee(\.com)?', '123Bee'),
+    (r'(www.)?123\s?[cC]hase(\.com)?', '123Chase'),
+    (r'(www.)?123\s?[pP]eppy(\.com)?', '123peppy'),
+    (r'(www.)?143\s?[dD]ressup(\.com)?', '143Dressup'),
+    (r'(www.)?143\s?[kK]ids\s?[gG]ames(\.com)?', '143Kidsgames'),
+    (r'(www.)?1[cC]oin1[pP]lay(\.com)?', '1Coin1Play'),
+    (r'(www.)?1[cC]ooking\s?[gG]ames(\.com)?', '1CookingGames'),
+    (r'(www.)?1[gG]ame[sS]ite(\.com)?', '1Gamesite'),
+    (r'(www.)?2[dD]\s?[pP]lay(\.com)?', '2DPlay'),
+    (r'(www.)?2[gG]ames(\.com)?', '2Games'),
+    (r'(www.)?2[kK]eys\s?[gG]ames(\.com)?', '2keysGames'),
+    (r'(www.)?2[pP][gG]ame(\.com)?', '2PGame'),
+    (r'(www.)?4399(\.com)?', '4399'),
+    (r'(www.)?4\s?[kK]ids(\sTV)(\.com)?', '4Kids'),
+    (r'(www.)?4[vV]4(\.com)?', '4v4'),
+    (r'(www.)?5[hH]ippos(\.com)?', '5Hippos'),
+    (r'(www.)?5[xX][Pp][lL][aA][yY](\.com)?', '5xPLAY'),
+    (r'(www.)?7DFPS\.com', '7DFPS'),
+    (r'(www.)?8Bit\.com?', '8bit.com'),
+    (r'(www.)?9[bB][gG]ames(\.com)?', '9bgames'),
+    (r'(www.)?9[M]ine(\.com)?', '9mine'),
+    (r'(www.)?[aA]ddicting\s?[gG]ames(\.com)?', 'Addicting Games'),
+    (r'(www.)?[aA]lbino\s?[bB]lack[sS]heep(\.com)?', 'Albino Blacksheep'),
+    (r'(www.)?[aA]ll\s?[fF]or\s?[gG]irls(\.net)?', 'AllForGirls'),
+    (r'(www.)?[aA]ll[gG]ames[aA]ll[fF]ree(\.com)?', 'AllGamesAllFree'),
+    (r'(www.)?[aA]rcade\s?[bB]omb(\.com)?', 'Arcadebomb'),
+    (r'(www.)?[bB]aby\s?[dD]aisy\s?[gG]ames(\.com)?', 'Baby Daisy Games'),
+    (r'(www.)?[bB]ig\s?[fF]ish\s?[gG]ames(\.com)?', 'Big Fish Games'),
+    (r'(www.)?[bB]ox\s?10(\.com)?', 'Box10'),
+    (r'(www.)?[bB]ubble[bB]ox(\.com)?', 'Bubblebox'),
+    (r'(www.)?[cC]huck\s[eE]\.?\s[cC]heese\'?s?(\.com)?', 'Chuck E. Cheese\'s'),
+    (r'(www.)?[cC]lick\s?[jJ]ogos(\.com)?', 'Click Jogos'),
+    (r'(www.)?[cC]oca\s?\-?[cC]ola(\.com)?', 'Coca-Cola'),
+    (r'(www.)?[dD]idi\s?[gG]ames(\.com)?', 'Didi Games'),
+    (r'(www.)?[dD]isney(\.(com|ru|co\.uk))?', 'Disney'),
+    (r'(www.)?[dD]oll\s?[dD]ivine(\.com)?', 'Doll Divine'),
+    (r'(www.)?[dD]olly\s?[gG]als(\.com)?', 'DollyGals'),
+    (r'(www.)?[dD]ream[wW]orks(\s?[aA]nimation(\sLCC)?)?(\.com)?', 'DreamWorks'),
+    (r'(www.)?[fF]lash\s?[gG]ames\s?247(\.com)?', 'Flash Games 247'),
+    (r'(www.)?[pP][iI][xX][aA][rR](\.com)?', 'Pixar')
     ]
 
 # Trim spaces and break lines
@@ -175,21 +216,23 @@ for items in cursor.fetchall():
 
     #Developer
     if query_item['developer'] != '':
+        new_developer = strip_all(query_item['developer'])
         for list_publisher_regex in publisher_list:
-            if re.search(list_publisher_regex[0], query_item['publisher']):
-                new_developer = re.sub(list_publisher_regex[0], list_publisher_regex[1], query_item['developer'])
-                if new_developer != query_item['developer']:
-                    cursor.execute('UPDATE game SET developer = (?) WHERE id = (?)', (new_developer, query_item['id']))
-                    changelog += "DEVELOPER - " + query_item['developer'] + " -> " + new_developer + '\n'
+            if re.search(list_publisher_regex[0], new_developer):
+                new_developer = re.sub(list_publisher_regex[0], list_publisher_regex[1], new_developer)
+        if new_developer != query_item['developer']:
+            cursor.execute('UPDATE game SET developer = (?) WHERE id = (?)', (new_developer, query_item['id']))
+            changelog += "DEVELOPER - " + query_item['developer'] + " -> " + new_developer + '\n'
     
     #Publisher
     if query_item['publisher'] != '':
+        new_publisher = strip_all(query_item['developer'])
         for list_publisher_regex in publisher_list:
-            if re.search(list_publisher_regex[0], query_item['publisher']):
-                new_publisher = re.sub(list_publisher_regex[0], list_publisher_regex[1], query_item['publisher'])
-                if new_publisher != query_item['publisher']:
-                    cursor.execute('UPDATE game SET publisher = (?) WHERE id = (?)', (new_publisher, query_item['id']))
-                    changelog += "PUBLISHER - " + query_item['publisher'] + " -> " + new_publisher + '\n'
+            if re.search(list_publisher_regex[0], new_publisher):
+                new_publisher = re.sub(list_publisher_regex[0], list_publisher_regex[1], new_publisher)
+        if new_publisher != query_item['publisher']:
+            cursor.execute('UPDATE game SET publisher = (?) WHERE id = (?)', (new_publisher, query_item['id']))
+            changelog += "PUBLISHER - " + query_item['publisher'] + " -> " + new_publisher + '\n'
 
     # Source, also used to online search
     testing_source = query_item['source']
