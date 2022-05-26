@@ -200,7 +200,9 @@ for items in cursor.fetchall():
         'Sports': ['American Football', 'Athletics', 'Baseball', 'Basketball', 'Billiards', 'Boating', 'Bowling', 'Boxing', 'Cricket', 'Curling', 'Equestrianism', 'Golf', 'Hockey', 'Motocross', 'Skateboarding', 'Skating', 'Skiing', 'Snowboarding', 'Soccer', 'Surfing', 'Tennis', 'Volleyball'],
         'Strategy': ['Ataxx', 'Battleship', 'Checkers', 'Chess', 'Domiones', 'Lane-Based Strategy', 'Node-Based Strategy', 'Real-Time Strategy', 'Reversi', 'Tower Defense', 'Tic-Tac-Toe'],
         'Game Jam': ['7DRL Challenge', 'BC Game Jam', 'BenBonk Game Jam', 'Butterscotch ShenaniJam', 'Casual Gameplay Design Competition', 'Decade Jam', 'Game Maker\'s Toolkit Game Jam', 'Game in Ten Days', 'Global Game Jam', 'Homestuck Game Jam', 'Lisp Game Jam', 'LOWREZJAM', 'Ludum Dare', 'Make-A-Thing Jam', 'Metroidvania Month', 'Mini Jam', 'NG Game Jam', 'Nokia 3310 Jam', 'Nordic Game Jam', 'One Game a Month', 'Pastel Jam', 'Pizza Jam', 'SPJam', 'Starmen.Net Funfest', 'Stencyl Jam', 'The Boob Jam', 'Touhou Fan Game Jam', 'xkcd Game Jam'],
-        'Pixel': ['GB Studio', 'PICO-8', 'LOWREZJAM', 'Nokia 3310 Jam']
+        'Pixel': ['GB Studio', 'PICO-8', 'LOWREZJAM', 'Nokia 3310 Jam'],
+        'Sexual Content': ['Anal', 'Anal Insertion', 'Anilingus', 'Cunnilingus', 'Fellatio', 'Fingering', 'Fisting', 'Footjob', 'Frottage', 'Handjob', 'Masturbation', 'Oral', 'Paizuri', 'Sex Toys', 'Tentacles', 'Touching', 'Tribadism', 'Vaginal', 'Vaginal Insertion'],
+        'Adult': ['Anal', 'Anal Insertion', 'Anilingus', 'Cunnilingus', 'Fellatio', 'Fingering', 'Fisting', 'Footjob', 'Frottage', 'Handjob', 'Masturbation', 'Oral', 'Paizuri', 'Sex Toys', 'Tentacles', 'Touching', 'Tribadism', 'Vaginal', 'Vaginal Insertion', 'Hentai', 'Cartoon Porn', 'Porn', 'BDSM', 'Bestiality', 'Breast Milking', 'Cannibalism', 'Enema', 'Gloryhole', 'Incest', 'Necrophilia', 'Oviposition', 'Podophilia', 'Quicksand', 'Vore']
     }
     for parent_tag in tag_list:
         for child_tag in tag_list[parent_tag]:
