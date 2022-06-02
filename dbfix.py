@@ -48,11 +48,9 @@ publisher_list = [
     (r'(www.)?[rR]usty\s?[aA]rcade(\.com)?', 'Rusty Arcade'),
     (r'(www.)?[rR]oxi\s?[gG]ames(\.com)?', 'RoxiGames'),
     (r'(www.)?[gG]ames\s?[sS]umo(\.com)?', 'GamesSumo'),
-    (r'(www.)?[cC]artoon\s?[rR]ace(\.com)?', 'CartoonRace'),
     (r'(www.)?[pP]pupu\s?[gG]ames(\.com)?', 'Pupu Games'),
     (r'(www.)?[pP]lay\s?[tT]oon\s?[gG]ames(\.com)?', 'Play Toon Games'),
     (r'(www.|^)[kK]ing\s?[gG]ames(\.net)?', 'King Games'),
-    (r'(www.)?[cC]ooKing\s?Games(\.com)?', 'Cooking Games'),
     (r'(www.)?[iI]nka\s?[gG]ames(\.com)?', 'Inka Games'),
     (r'(www.)?[nN]ickelodeon(\.com)?', 'Nickelodeon'),
     (r'(www.)?1000([wW]eb)?\s?[gG]ames(\.com)?', '1000 Web Games'),
@@ -86,9 +84,20 @@ publisher_list = [
     (r'(www.)?[bB]ig\s?[fF]ish\s?[gG]ames(\.com)?', 'Big Fish Games'),
     (r'(www.)?[bB]ox\s?10(\.com)?', 'Box10'),
     (r'(www.)?[bB]ubble[bB]ox(\.com)?', 'Bubblebox'),
+    (r'(www.)?[cC]artoon\s?[rR]ace(\.com)?', 'CartoonRace'),
     (r'(www.)?[cC]huck\s[eE]\.?\s[cC]heese\'?s?(\.com)?', 'Chuck E. Cheese\'s'),
-    (r'(www.)?[cC]lick\s?[jJ]ogos(\.com)?', 'Click Jogos'),
+    (r'(www.)?[cC]lick\s?[jJ]ogos(\.com)?(\.br)?', 'Click Jogos'),
     (r'(www.)?[cC]oca\s?\-?[cC]ola(\.com)?', 'Coca-Cola'),
+    (r'(www.)?[cC]ooking\s?[gG]ames(\.com)?', 'Cooking Games'),
+    (r'(www.)?[cC]ooking\s?[pP]ink(\.com)?', 'Cooking Pink'),
+    (r'(www.)?[cC]ool\s?[bB]udd?y(\.com)?', 'Coolbuddy.com'),
+    (r'(www.)?[cC]ool\s?[gG]ames\s?[bB]ox(\.com)?', 'Cool Games Box'),
+    (r'(www.)?[cC]ool\s?[mM]ath[\s\-]?[gG]ames(\.com)?', 'Cool Math Games'),
+    (r'(www.)?[cC]ool\s?[mM]ath(\.com)?(, Inc.)?', 'Cool Math'),
+    (r'(www.)?[cC]ool\s?[tT]emple(\.com)?', 'Cool Temple'),
+    (r'(www.)?[cC]razy\s?[gG]ames(\.com)?', 'Crazy Games'),
+    (r'(www.)?[cC]ute\s?[fF]lash[gG]ames(\.com)?', 'Cute Flash Games'),
+    (r'(www.)?[cC]osmictopia(\.com)?', 'Cosmictopia'),
     (r'(www.)?[dD]idi\s?[gG]ames(\.com)?', 'Didi Games'),
     (r'(www.)?[dD]isney(\.(com|ru|co\.uk))?', 'Disney'),
     (r'(www.)?[dD]oll\s?[dD]ivine(\.com)?', 'Doll Divine'),
@@ -99,7 +108,7 @@ publisher_list = [
     ]
 
 # Trim spaces and break lines
-strip_all = lambda value: value.strip('\r\n').strip('\n').strip().replace('\n\n\n', '\n\n').replace('\r\n\r\n\r\n', '\r\n\r\n')
+strip_all = lambda value: value.strip('\r\n').strip('\n').strip('\t').strip().replace('\n\n\n', '\n\n').replace('\r\n\r\n\r\n', '\r\n\r\n')
 
 # Match url with site definitions and try to download meta if any matches
 def get_web_meta(url):
