@@ -126,6 +126,8 @@ publisher_list = [
     (r'(www.)?[pP][iI][xX][aA][rR](\.com)?', 'Pixar')
     ]
 
+WAYBACK_REGEX = r'(?i)\s\(?(via\s?)?(the\s?)?\(?wayback?\s?(machine)?'
+
 # Trim spaces and break lines
 strip_all = lambda value: value.strip('\r\n').strip('\n').strip('\t').strip().replace('\n\n\n', '\n\n').replace('\r\n\r\n\r\n', '\r\n\r\n')
 
@@ -274,9 +276,13 @@ for items in cursor.fetchall():
                     if testing_source != None:
                         cursor.execute('UPDATE game SET source = (?) WHERE id = (?)', (testing_source, query_item['id']))
                         changelog += "SOURCE - " + query_item['source'] + " -> " + testing_source + '\n'
-                except:
-                    pass
+                except: pass
                 break
+    else:
+        testing_source = re.sub(WAYBACK_REGEX, " (via Wayback Machine)", strip_all(testing_source))
+        if testing_source != None and testing_source != query_item['source']:
+            cursor.execute('UPDATE game SET source = (?) WHERE id = (?)', (testing_source, query_item['id']))
+            changelog += "SOURCE - " + query_item['source'] + " -> " + testing_source + '\n'
 
     # Developer, Release Date, Original Description = online search
     no_publisher = query_item
