@@ -126,7 +126,7 @@ publisher_list = [
     (r'(www.)?[pP][iI][xX][aA][rR](\.com)?', 'Pixar')
     ]
 
-WAYBACK_REGEX = r'(?i)\s\(?(via\s?)?(the\s?)?\(?wayback?\s?(machine)?'
+WAYBACK_REGEX = r'(?i)\s\(?(via\s?)?(the\s?)?\(?wayback?\s?(machine)?\)?'
 
 # Trim spaces and break lines
 strip_all = lambda value: value.strip('\r\n').strip('\n').strip('\t').strip().replace('\n\n\n', '\n\n').replace('\r\n\r\n\r\n', '\r\n\r\n')
@@ -258,7 +258,7 @@ for items in cursor.fetchall():
     
     #Publisher
     if query_item['publisher'] != '':
-        new_publisher = strip_all(query_item['developer'])
+        new_publisher = strip_all(query_item['publisher'])
         for list_publisher_regex in publisher_list:
             if re.search(list_publisher_regex[0], new_publisher):
                 new_publisher = re.sub(list_publisher_regex[0], list_publisher_regex[1], new_publisher)
